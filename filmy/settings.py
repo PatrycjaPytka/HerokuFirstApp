@@ -21,8 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-SECRET_KEY = config(SECRET_KEY)
-DEBUG = config(DEBUG, default=False, cast=bool)
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+# SECRET_KEY='u#k3j1%clrlp61o(^8c@s*st74n+23bz2v*mtx2^%+tcx%#cbb'
+# DEBUG=False
 
 ALLOWED_HOSTS = ['tutorialpp1.herokuapp.com', '127.0.0.1']
 
