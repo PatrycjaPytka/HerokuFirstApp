@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Films {% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        {% if user.is_authenticated %}
+            <h1 class = 'display-4'>Witaj {{ user.username }} <br></h1>
+            <a href = "{% url 'logout' %}" class = "btn btn-secondary">Log out <i class="fas fa-sign-out-alt"></i></a>
+    </div>
+        {% else %}
+             <a href = "{% url 'login' %}" class = "btn btn-secondary">Login <i class="fas fa-sign-in-alt"></i></a>
+        {% endif %}
+
+        <a href = "{% url 'new_film' %}">New <i class="fas fa-plus-circle"></i></a>
+
+        {% if filmy|length == 0 %}
+            <h3>Brak filmów</h3>
+        {% else %}
+            {% for film in filmy %}
+                <div class = "card">
+                    <div class = "card-body">
+                        <img src = "/media/{{film.plakat}}" class = "film-image">
+                        <div class = "row">
+                            <div class = "col-9">
+                                <h5 class="card-title">{{ film }}</h5>
+                            </div>
+                            <div class = 'col-3'>
+                                <a href = "{% url 'edit_film' film.id %}"><i class="fas fa-edit film-icon"></i></a>
+                                <a href = "{% url 'delete_film' film.id %}"><i class="fas fa-trash-alt film-icon"></i></a>
+                            </div>
+                        </div>
+                            <div class = "row">
+                            <p class = "card-text opis">{{ film.about }}</p>
+                            </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %} Add {% endblock %}
+
+{% block content %}
+    <div class="card" style="width: 32rem;">
+        <div class="card-body">
+            {% if new == True %}
+                <h5 class="card-title">New</h5>
+            {% else %}
+                <h5 class="card-title">Edit</h5>
+            {% endif %}
+            <form method = 'POST' enctype = 'multipart/form-data'>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                {{ form_info|bootstrap }}
+                {% if new == True %}
+                    <button type = 'submit' class="btn btn-secondary"> Add film </button>
+                {% else %}
+                    <button type = 'submit' class="btn btn-secondary"> Edit film </button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <div class="card" style="width: 32rem;">
+        <div class="card-body">
+            <h5 class="card-title">Add rating</h5>
+            <form method = 'POST' enctype = 'multipart/form-data'>
+                {% csrf_token %}
+                {{ form_rate|bootstrap }}
+                <button type = 'submit' class="btn btn-secondary"> Rate </button>
+            </form>
+        </div>
+    </div>
+
+    {% for r in rate %}
+        <h4> {{r.stars}} </h4>
+        <p> {{r.review}} </p>
+    {% endfor %}
+
+
+    <a href = "{% url 'film_titles' %}"> Back </a>
+
+{% endblock %}

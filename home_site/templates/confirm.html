@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %} Confirm {% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h5 class="card-title">Are you sure you want to delete "{{ film.title }}"?</h5>
+    <form method = 'POST'>
+        {% csrf_token %}
+        {{ form }}
+        <button type = 'submit' class="btn btn-danger"> Delete <i class="fas fa-minus-circle"></i></button>
+    </form>
+    </div>
+    <a href = "{% url 'film_titles' %}" class="btn btn-secondary"> Back <i class="fas fa-arrow-circle-left"></i></a>
+{% endblock %}
